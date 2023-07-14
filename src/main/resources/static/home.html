@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/home.css" type="text/css">
+    <title>HOME</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">SermonApp</a>
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="btn btn-danger navbar-btn" href="./login.html" onclick="handleLogout()">Logout</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container" id="home-container">
+    <div id="sermon-form-container">
+        <form id="sermon-form">
+            <div class="form-group">
+                <label for="sermon-title">Sermon Title</label>
+                <input type="text" class="form-control" id="sermon-title" placeholder="Enter the sermon title" required>
+            </div>
+            <div class="form-group">
+                <label for="sermon-description">Sermon Description</label>
+                <input type="text" class="form-control" id="sermon-description" placeholder="Enter description" required>
+                <textarea class="form-control" id="sermon-input" placeholder="Add more notes for sermon description"
+                          rows="5"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="sermon-scripture">Scripture Reference</label>
+                <input type="text" class="form-control" id="sermon-scripture"
+                       placeholder="Enter the scripture reference" required>
+            </div>
+            <div class="form-group">
+                <label for="sermon-date">Date</label>
+                <input type="date" class="form-control" id="sermon-date" placeholder="Enter the date" required>
+            </div>
+            <div class="form-group">
+                <label for="category-name">Category</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="category-checkbox">
+                    <label class="form-check-label" for="category-checkbox">Do you have a category?</label>
+                </div>
+                <div id="category-options" style="display: none;">
+                    <select class="form-control" id="category-name"></select>
+                </div>
+                <div id="category-input" style="display: none;">
+                    <input type="text" class="form-control" id="category-name-input" placeholder="Enter category">
+                </div>
+            </div>
+            <button id="submit-sermon-button" type="submit" class="btn btn-primary mt-1">Submit Sermon</button>
+        </form>
+
+        <div id="sermon-container" class="container-fluid"></div>
+    </div>
+</div>
+
+<!-- Comment section form-->
+<div class="container" id="comment-form-container">
+    <form id="comment-form">
+        <div class="form-group">
+            <label for="comment-form-body">Comment</label>
+            <textarea class="form-control" rows="3" id="comment-form-body" placeholder="Enter your comment" required></textarea>
+        </div>
+        <button id="submit-comment-button" type="submit" class="btn btn-primary mt-1">Submit Comment</button>
+    </form>
+</div>
+
+<div id="comment-container" class="container-fluid"></div>
+</div>
+
+<!-- Sermon Edit Modal -->
+<div class="modal fade" id="sermon-edit-modal" data-bs-backdrop="static" tabindex="-1"
+     aria-labelledby="sermon-edit-modal-title" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="sermon-edit-modal-title">Edit Sermon</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body d-flex">
+                <div class="modal-body">
+                    <form id="edit-sermon-form">
+                        <div class="form-group">
+                            <label for="edit-sermon-title">Sermon Title</label>
+                            <input type="text" class="form-control" id="edit-sermon-title" placeholder="Enter the sermon title" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-sermon-description">Sermon Description</label>
+                            <input type="text" class="form-control" id="edit-sermon-description" required>
+                            <textarea class="form-control" id="edit-sermon-input"
+                                      placeholder="Enter the sermon description" rows="5"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-sermon-scripture">Scripture Reference</label>
+                            <input type="text" class="form-control" id="edit-sermon-scripture"
+                                   placeholder="Enter the scripture reference" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-sermon-date">Date</label>
+                            <input type="date" class="form-control" id="edit-sermon-date" placeholder="Enter the date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-category-name">Category</label>
+                            <input type="text" class="form-control" id="edit-category-name-field" placeholder="Enter category">
+                            <select class="form-control" id="edit-category-name"></select>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" id="update-sermon-button" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Comment Edit Modal -->
+<div class="modal fade" id="comment-edit-modal" tabindex="-1" aria-labelledby="comment-edit-modal-title" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="comment-edit-modal-title">Edit Comment</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body d-flex">
+                <textarea class="form-control" rows="5" id="comment-body"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" id="update-comment-button" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+                <button type="button" id="delete-comment-button" class="btn btn-danger">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="./javascript/home.js" type="application/javascript"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--possible code to use:
+<!body>
+<!div class="container">
+    <!h1>Home<!/h1>
+
+     Add Sermon Form --
+--
+    <h2>Add Sermon</h2>
+    <form id="add-sermon-form">
+        <div class="form-group">
+            <label for="sermon-title">Title</label>
+            <input type="text" class="form-control" id="sermon-title" placeholder="Title">
+        </div>
+        <div class="form-group">
+            <label for="sermon-description">Description</label>
+            <textarea class="form-control" id="sermon-description" rows="3" placeholder="Description"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Sermon</button>
+    </form>
+-->
+    <!-- Sermons Container -->
+<!--
+    <div id="sermons-container">
+        -- Sermon Cards will be dynamically generated here --
+    </div>
+
+    <-- Edit Sermon Modal -->
+<!--
+    <div class="modal" id="edit-sermon-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                -- Edit Sermon form will be dynamically populated here --
+            </div>
+        </div>
+    </div>
+
+    -- Add Comment Form --
+    <h2>Add Comment</h2>
+    <form id="add-comment-form">
+        <div class="form-group">
+            <label for="comment-body">Comment</label>
+            <textarea class="form-control" id="comment-body" rows="3" placeholder="Comment"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Comment</button>
+    </form>
+
+    -- Comments Container --
+    <div id="comments-container">
+        -- Comment Cards will be dynamically generated here --
+    </div>
+
+    -- Edit Comment Modal --
+    <div class="modal" id="edit-comment-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                -- Edit Comment form will be dynamically populated here --
+            </div>
+        </div>
+    </div>
+</div>
+-->

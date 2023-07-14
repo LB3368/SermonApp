@@ -1,5 +1,6 @@
 package com.devmountain.sermonApp.entities;
 
+import com.devmountain.sermonApp.dtos.CommentDto;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -32,4 +33,13 @@ public class Comment {
     @ManyToOne
     @JsonBackReference
     private Sermon sermon;
+
+    public Comment(CommentDto commentDto) {
+        if (commentDto.getBody() != null) {
+            this.body = commentDto.getBody();
+        }
+        if (commentDto.getTime_stamp() != null) {
+            this.timeStamp = commentDto.getTime_stamp();
+        }
+    }
 }

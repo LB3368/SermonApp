@@ -1,5 +1,6 @@
 package com.devmountain.sermonApp.entities;
 
+import com.devmountain.sermonApp.dtos.SermonDto;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -49,4 +51,26 @@ public class Sermon {
     @ManyToOne
     @JsonBackReference
     private User user;
+
+    public Sermon(SermonDto sermonDto) {
+        if (sermonDto.getId() != null) {
+            this.id = sermonDto.getId();
+        }
+        if (sermonDto.getTitle() != null) {
+            this.title = sermonDto.getTitle();
+        }
+        if (sermonDto.getDescription() != null) {
+            this.description = sermonDto.getDescription();
+        }
+        if (sermonDto.getScriptureReference() != null) {
+            this.scriptureReference = sermonDto.getScriptureReference();
+        }
+        if (sermonDto.getDate() != null) {
+            this.date = sermonDto.getDate();
+        }
+    }
+
+    public Collection<Comment> getComments() {
+        return commentSet;
+    }
 }

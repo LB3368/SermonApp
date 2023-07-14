@@ -1,5 +1,6 @@
 package com.devmountain.sermonApp.entities;
 
+import com.devmountain.sermonApp.dtos.CategoryDto;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,6 +25,15 @@ public class Category {
     private String name;
 
     @ManyToMany(mappedBy = "categories", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+//    @JoinTable(name = "CategorySermon",
+//    joinColumns = @JoinColumn(name = "sermon_id"),
+//    inverseJoinColumns = @JoinColumn(name = "category_id"))
     @JsonBackReference
     private Set<Sermon> sermons = new HashSet<>();
+
+    public Category(CategoryDto categoryDto) {
+        if (categoryDto.getName() != null) {
+            this.name = categoryDto.getName();
+        }
+    }
 }
