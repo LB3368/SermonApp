@@ -1,0 +1,126 @@
+/* home.css */
+
+/* Global styles */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Navigation Bar */
+.navbar {
+    background-color: #f8f9fa;
+}
+
+.navbar-brand {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.navbar-btn {
+    margin-left: 10px;
+}
+
+/* Main Content */
+#home-container {
+    margin-top: 30px;
+}
+
+#sermon-form-container {
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#sermon-form label {
+    font-weight: bold;
+}
+
+#category-checkbox {
+    margin-right: 5px;
+}
+
+#category-options,
+#category-input {
+    margin-top: 10px;
+}
+
+#category-select,
+#edit-category-list-name {
+    width: 100%;
+}
+
+/* Sermon Cards */
+#sermon-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.sermon-card {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.sermon-card h4 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.sermon-card p {
+    margin-bottom: 10px;
+}
+
+.sermon-card button {
+    margin-top: 10px;
+}
+
+/* Comment Form */
+#comment-form-container {
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+/* Modals */
+.modal-dialog {
+    max-width: 600px;
+}
+
+.modal-content {
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.modal-title {
+    font-weight: bold;
+}
+
+.modal-body {
+    margin-top: 10px;
+}
+
+.modal-footer button {
+    margin-right: 5px;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .navbar-brand {
+        font-size: 20px;
+    }
+}
+

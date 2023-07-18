@@ -35,7 +35,7 @@ public class CategoryServiceImpl implements CategoryService{
     @Override
     @Transactional
     public void addCategory(CategoryDto categoryDto) {
-        Optional<Category> categoryOptional = categoryRepository.findById(categoryDto.getId());
+        //Optional<Category> categoryOptional = categoryRepository.findById(categoryDto.getId());
         Category category = new Category(categoryDto);
         categoryRepository.saveAndFlush(category);
     }

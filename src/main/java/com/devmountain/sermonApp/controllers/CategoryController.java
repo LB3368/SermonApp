@@ -24,11 +24,11 @@ public class CategoryController {
     }
 
     @GetMapping("/{categoryId}")
-    public Optional<CategoryDto> getCategoryById(@PathVariable Long categoryId) {
+    public Optional<CategoryDto> getCategory(@PathVariable Long categoryId) {
         return categoryService.getCategoryById(categoryId);
     }
 
-    @PostMapping("/{userId}/{sermonId}")
+    @PostMapping
     public void addCategory(@RequestBody CategoryDto categoryDto) {
         categoryService.addCategory(categoryDto);
     }

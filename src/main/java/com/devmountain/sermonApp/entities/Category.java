@@ -32,6 +32,9 @@ public class Category {
     private Set<Sermon> sermons = new HashSet<>();
 
     public Category(CategoryDto categoryDto) {
+        if (categoryDto.getId() != null) {
+            this.id = categoryDto.getId();
+        }
         if (categoryDto.getName() != null) {
             this.name = categoryDto.getName();
         }
